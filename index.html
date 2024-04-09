@@ -137,18 +137,34 @@
             <section class="strana pocetna">
                   <div class="unos">
                         <div class="unos-container">
-                              <div class="labelUnos labelBRCK">
-                                    <h1>BROJ CLANSKE KARTE :</h1>
-                              </div>
-                              <div class="labelUnos labeltraziKnjigu">
-                                    <h1>NAZIV KNJIGE :</h1>
-                              </div>
+                            <div class="labelUnos labelBRCK">
+                                <label for="broj_clanske_karte">BROJ CLANSKE KARTE :</label>
+                            </div>
+                            <div class="labelUnos labeltraziKnjigu">
+                                <label for="naziv_knjige">NAZIV KNJIGE :</label>
+                            </div>
                         </div>
                         <div class="unosiBox">
-                              <div class="unosCont BRCK"></div>
-                              <div class="unosCont traziKnjigu"></div>
+                            <div class="unosCont BRCK">
+                                <input id="broj_clanske_karte" class="input BRCK" type="text">
+                            </div>
+                            <div class="unosCont traziKnjigu">
+                              <div class="container">
+                                    <form autocomplete="off">
+                                      <div class="finder">
+                                        <div class="finder__outer">
+                                          <div class="finder__inner">
+                                            <div class="finder__icon" ref="icon"></div>
+                                            <input id="naziv_knjige" class="finder__input" type="text" name="q" />
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </div>
+                            </div>
                         </div>
-                  </div>
+                    </div>
+                    
             </section>
       </main>
 </body>

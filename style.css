@@ -150,13 +150,11 @@ aside:hover .ikonicaHover
 	opacity: 1;
 }
 
-.ikonicaHover h1
+.unos-container label 
 {
 	letter-spacing: 0.1rem;
-	font-size: 1.4rem;
+	font-size: 1.5rem;
 	color: #000000c3;
-	margin-left: 1.2rem;
-	margin-top: 1rem;
 }
 
 .navUnderline
@@ -206,6 +204,7 @@ aside:hover .ikonicaHover
 }
 
 .labelUnos{
+	margin-bottom: 0.5rem;
       width: fit-content;
       border-bottom: 0.3rem solid #3678fd;
 }
@@ -219,12 +218,16 @@ aside:hover .ikonicaHover
       gap: 1rem;
 }
 
-.labelUnos h1{
+.labelUnos label{
       white-space: nowrap;
       width: fit-content;
 }
 
-.unosCont{
+.input{
+	font-size: 1.5rem;
+	border-right: none;
+	border-left: none;
+	padding: 0 1rem 0 1rem;
       margin-left: 1rem;
       width: 20rem;
       height: 2.3rem;
@@ -232,6 +235,12 @@ aside:hover .ikonicaHover
       border-radius: 1rem;
       border-bottom: 0.4rem solid #3678fd;
       border-top: 0.2rem solid #3678fd;
+	transition: all 0.3s ease-in-out;
+}
+
+.input:focus{
+	outline: none;
+	box-shadow: 0 0 1.5rem rgba(160, 108, 255, 0.4);
 }
 
 .unosiBox{
@@ -239,3 +248,116 @@ aside:hover .ikonicaHover
       flex-direction: column;
       gap: 1rem;
 }
+
+.container {
+	text-align: center;
+	color: #2c3e50;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+    }
+    form {
+	transition: all 0.5s;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+    }
+    .finder {
+	border: 1px solid #fff;
+	background-color: #f6f5f0;
+	border-radius: 15px;
+	padding: 8px;
+	box-shadow: 9px 9px 16px rgba(189, 189, 189, 0.6), -9px -9px 16px rgba(255, 255, 255, 0.5);
+    }
+    .finder__outer {
+	display: flex;
+	width: 600px;
+	padding: 1.5rem 2rem;
+	border-radius: 10px;
+	box-shadow: inset 10px 10px 15px -10px #c3c3c3, inset -10px -10px 15px -10px #ffffff;
+    }
+    .finder__inner {
+	display: flex;
+	align-items: center;
+	position: relative;
+	flex: 1;
+    }
+    .finder__form {
+	flex: 1;
+	height: calc(100% + 3rem);
+    }
+    .finder__input {
+	height: calc(100% + 3rem);
+	border: none;
+	background-color: transparent;
+	outline: none;
+	font-size: 1.5rem;
+	letter-spacing: 0.75px;
+    }
+    .finder__icon {
+	width: 40px;
+	height: 40px;
+	margin-right: 1rem;
+	transition: all 0.2s;
+	box-shadow: inset 0 0 0 20px #292929;
+	border-radius: 50%;
+	position: relative;
+    }
+    .finder__icon:after, .finder__icon:before {
+	display: block;
+	content: "";
+	position: absolute;
+	transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+    .finder__icon:after {
+	width: 10px;
+	height: 10px;
+	background-color: #292929;
+	border: 3px solid #f6f5f0;
+	top: 50%;
+	position: absolute;
+	transform: translateY(-50%);
+	left: 0px;
+	right: 0;
+	margin: auto;
+	border-radius: 50%;
+    }
+    .active self:after {
+	border-width: 10px;
+	background-color: #f6f5f0;
+    }
+    .finder__icon:before {
+	width: 4px;
+	height: 13px;
+	background-color: #f6f5f0;
+	top: 50%;
+	left: 20px;
+	transform: rotateZ(45deg) translate(-50%, 0);
+	transform-origin: 0 0;
+	border-radius: 4px;
+    }
+    .active self:before {
+	background-color: #292929;
+	width: 6px;
+	transform: rotateZ(45deg) translate(-50%, 25px);
+    }
+    .processing .finder__icon {
+	transform-origin: 50%;
+	animation: spinner 0.3s linear infinite;
+	animation-delay: 0.5s;
+    }
+    .active .finder__icon {
+	transform: translateY(-5px);
+    }
+    @keyframes spinner {
+	0% {
+	  transform: rotateZ(45deg);
+	}
+	100% {
+	  transform: rotateZ(405deg);
+	}
+    }
+    
