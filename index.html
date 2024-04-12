@@ -138,16 +138,31 @@
                   <div class="unos">
                         <div class="unos-container">
                               <div class="labelUnos labelBRCK">
-                                    <h1>BROJ CLANSKE KARTE :</h1>
+                                    <label>BROJ CLANSKE KARTE :</h1>
                               </div>
                               <div class="labelUnos labeltraziKnjigu">
-                                    <h1>NAZIV KNJIGE :</h1>
+                                    <label>NAZIV KNJIGE :</h1>
                               </div>
                         </div>
                         <div class="unosiBox">
-                              <div class="unosCont BRCK"></div>
-                              <div class="unosCont traziKnjigu"></div>
+                              <input type="text" class="unosCont BRCK">
+                              <form class="search-form">
+                                    <input type="text" class="unosCont search" placeholder="Nadji knjigu po nazivu ili po ID">
+                                    <ul class="suggestions">
+                                    </ul>
+                              </form>
                         </div>
+                        <div class="dodajClana-container">
+                              <div class="dodajclanaBG">
+                                    <img class="dodajClanaIkoncia" id="navIkonica" src="Materijal/Ikonice/Pocetna/dodajKorisnikaDugme.png" alt="">
+                              </div>
+                        </div>
+                        <div class="popup" id="popup">
+                              <div class="popup-content">
+                                <span class="popup-close" id="popup-close">&times;</span>
+                                <p>This is the pop-up content.</p>
+                              </div>
+                            </div>
                   </div>
             </section>
       </main>
