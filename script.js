@@ -129,6 +129,19 @@ suggestions.addEventListener('click', function(event) {
   event.stopPropagation();
 });
 
+
+const dugmeOdaberiClanarinu = document.querySelector('.toggle');
+const opcijeClanarine = document.querySelectorAll('.list-item');
+const pozivNaBrojSpan = document.getElementById('pozivNaBroj');
+const pozivNaBrojPopUp = document.querySelector('.pozivNaBrojPopUp');
+const zatvoridugmeOdaberiClanarinu = document.getElementById('zatvoripozivNaBrojPopUp');
+zatvoridugmeOdaberiClanarinu.addEventListener('click', closePopUp);
+
+function closePopUp() {
+  pozivNaBrojPopUp.classList.remove('active');
+  pozivNaBrojPopUp.style.zIndex = '-1';
+}
+
 function generateRandomNumber() {
   let randomNumber = '';
   for (let i = 0; i < 5; i++) {
@@ -139,31 +152,20 @@ function generateRandomNumber() {
   return randomNumber;
 }
 
-const button = document.querySelector('.toggle');
-const listItems = document.querySelectorAll('.list-item');
-const pozivNaBrojSpan = document.getElementById('pozivNaBroj');
-const pozivNaBrojPopUp = document.querySelector('.pozivNaBrojPopUp');
-const zatvoriButton = document.getElementById('zatvoripozivNaBrojPopUp');
-zatvoriButton.addEventListener('click', closePopUp);
-
-function closePopUp() {
-  pozivNaBrojPopUp.classList.remove('active');
-}
-
 const usedNumbers = new Set();
 
-listItems.forEach(item => {
+opcijeClanarine.forEach(item => {
   item.addEventListener('click', () => {
       console.log("Clicked item:", item.textContent);
-      button.textContent = item.textContent.trim();
-      console.log("Button text:", button.textContent);
-      console.log("Odabrano:", button.textContent);
+      dugmeOdaberiClanarinu.textContent = item.textContent.trim();
+      console.log("dugmeOdaberiClanarinu text:", dugmeOdaberiClanarinu.textContent);
+      console.log("Odabrano:", dugmeOdaberiClanarinu.textContent);
 
-      if (button.textContent === "MESECNO ELEKTRONSKI" || button.textContent === "GODISNJE ELEKTRONSKI") {
+      if (dugmeOdaberiClanarinu.textContent === "MESECNO ELEKTRONSKI" || dugmeOdaberiClanarinu.textContent === "GODISNJE ELEKTRONSKI") {
           let randomNumber;
           do {
               randomNumber = generateRandomNumber();
-              console.log("Generated number:", randomNumber);
+              console.log("Generisan poziv na broj:", randomNumber);
           } while (usedNumbers.has(randomNumber));
           
           usedNumbers.add(randomNumber);
@@ -174,10 +176,6 @@ listItems.forEach(item => {
           pozivNaBrojPopUp.classList.remove('active');
       }
   });
-});
-
-button.addEventListener('click', () => {
-  console.log("Button clicked");
 });
 
 const btn_odustaniDodajclana = document.getElementById('odustanidodajClana');
@@ -191,26 +189,32 @@ const popuppotvrdaPotvrde = document.querySelector('.potvrdazadodavanjeclana');
 btn_dodajClana.addEventListener('click', () => {
   dodajClanaPopUp.classList.add('active');
   dodajClanaPopUp.style.display = 'flex';
-  console.log('kliknuto za pop up otvaranje dodavanje clana');
+  console.log('Klinuto dugme za otvaranje pop up za dodavanje clana');
 });
 
 btn_odustaniDodajclana.addEventListener('click', () => {
   dodajClanaPopUp.classList.remove('active');
-
+  console.log('Klinuto dugme za odustajanje od kreiranja novog clana');
 });
 
 btn_potvrdiDodajclana.addEventListener('click', () => {
   popuppotvrdaPotvrde.classList.add('active');
+  pozivNaBrojPopUp.style.display = 'none';
+  console.log('Klinuto dugme za potvrdjivanje od kreiranja novog clana');
 });
 
 btn_odustanipopDodajclana.addEventListener('click', () => {
+  dodajClanaPopUp.classList.remove('active');
   popuppotvrdaPotvrde.classList.remove('active');
+  console.log('Klinuto dugme za odustajanje od kreiranja novog clana u pop up');
   
 });
 
 btn_potvrdipopDodajclana.addEventListener('click', () => {
+  dodajClanaPopUp.classList.remove('active');
   popuppotvrdaPotvrde.classList.remove('active');
-});
+  console.log('Klinuto dugme za potvrdjivanje od kreiranja novog clana u pop up');
+  });
 
 
 });

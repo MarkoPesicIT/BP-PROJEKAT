@@ -19,10 +19,7 @@ html {
 
 body {
       background: radial-gradient(circle, rgba(255, 192, 104, 0.7) 0%, rgba(141, 194, 255, 0.5) 100%);
-      scrollbar-width: none;
-      /* Firefox */
       -ms-overflow-style: none;
-      /* IE and Edge */
 }
 
 a {
@@ -197,7 +194,7 @@ aside:hover .ikonicaHover {
 .kocka {
       width: 1.5rem;
       aspect-ratio: 1/1;
-      rotate: 45deg;
+      transform: rotate(45deg);
       transition: background-color 0.3s ease;
 }
 
@@ -232,18 +229,17 @@ aside:hover .ikonicaHover {
 }
 
 .strana {
-      display: none;
       opacity: 0;
-      transition: opacity 0.3s ease-in-out;
+      transition: opacity 0.1s ease-in-out;
 }
 
 .strana.active {
-      display: block;
       opacity: 1;
 }
 
 
 .labelUnos {
+      width: -moz-fit-content;
       width: fit-content;
       border-bottom: 0.3rem solid var(--primary);
 }
@@ -260,6 +256,7 @@ aside:hover .ikonicaHover {
 .labelUnos label {
       /* position: absolute; */
       white-space: nowrap;
+      width: -moz-fit-content;
       width: fit-content;
 }
 
@@ -359,7 +356,7 @@ span.population {
 }
 
 .dodajclanaBG:hover {
-      scale: 1.1;
+      transform:scale(1.1);
       outline: 3px solid var(--primary);
 }
 
@@ -369,6 +366,7 @@ span.population {
 
 
 .dodavanjeClanaPopUp {
+      transform: translateY(15%);
       position: absolute;
       padding: 1rem;
       opacity: 0;
@@ -456,6 +454,7 @@ span.population {
       padding-left: 10px;
       transition: 0.4s, transform 0.4s var(--delay);
       transform: translateX(-100%);
+      -webkit-user-select: none;
       user-select: none;
       cursor: pointer;
 }
@@ -484,7 +483,7 @@ span.population {
       justify-content: space-evenly;
 }
 
-.potvrdiOdustani button {
+.btnPotvrdiodustani {
       width: 8rem;
       font-size: 1.4rem;
       padding: 0 8px 0 8px;
@@ -496,17 +495,17 @@ span.population {
       border: none;
 }
 
-.potvrdiOdustani button:hover {
-      scale: 1.1;
+.btnPotvrdiodustani:hover {
+      transform: scale(1.1);
 }
 
-#potvrdidodajClana {
+.potvrdidodajClana {
       background-color: rgba(0, 255, 0, 0.2);
       border-bottom: 0.4rem solid rgb(0, 170, 0);
       border-top: 0.2rem solid rgb(0, 170, 0);
 }
 
-#odustanidodajClana {
+.odustanidodajClana {
       background-color: rgba(255, 0, 0, 0.2);
       border-bottom: 0.4rem solid rgb(255, 80, 80);
       border-top: 0.2rem solid rgb(255, 80, 80);
@@ -559,12 +558,29 @@ span.population {
     }
 
     #zatvoripozivNaBrojPopUp:hover{
-      scale: 1.05;
+      transform: scale(1.05);
     }
     
     .potvrdazadodavanjeclana{
+      padding: 1rem;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      border-radius: 1rem;
+      border-bottom: 0.4rem solid var(--primary);
+      border-top: 0.2rem solid var(--primary);
+      background-color: rgb(250, 250, 250);
+      box-shadow: var(--box-shadow-07);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 22rem;
       opacity: 0;
+      gap: 2rem;
       transition: all 0.2s ease-in-out;
+      font-size: 1rem;
     }
     .potvrdazadodavanjeclana.active{
       opacity: 1;
