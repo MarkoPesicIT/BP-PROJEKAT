@@ -139,7 +139,6 @@ zatvoridugmeOdaberiClanarinu.addEventListener('click', closePopUp);
 
 function closePopUp() {
   pozivNaBrojPopUp.classList.remove('active');
-  pozivNaBrojPopUp.style.zIndex = '-1';
 }
 
 function generateRandomNumber() {
