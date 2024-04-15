@@ -224,5 +224,13 @@ btn_potvrdipopDodajclana.addEventListener('click', () => {
     
     $('#tab-'+tabID).addClass('active').siblings().removeClass('active');
   });
+  var dateInput = document.getElementById('unosDodajClana');
 
+  // Add an event listener to detect changes in the input value
+  dateInput.addEventListener('change', function() {
+    var selectedDate = dateInput.value;
+    console.log("Selected date:", selectedDate);
+    // You can perform any action here with the selected date
+  });
+  
 });

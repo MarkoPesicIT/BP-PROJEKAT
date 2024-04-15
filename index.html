@@ -13,6 +13,166 @@
 </head>
 
 <body>
+      
+<script>
+      // script.js
+
+function DatePicker(spec) {
+  var
+    currentOption = spec.current,
+    itemIndex;
+
+  function generateOptions(data, item) {
+    var i, state, options = [];
+
+    function computeState(currentIndex, itemIndex) {
+      if (currentIndex === itemIndex) {
+        return 'active';
+      }
+
+      if (itemIndex >= 0 && Math.abs(itemIndex - currentIndex) < Math.ceil(spec.visible / 2)) {
+        return '';
+      }
+
+      return null;
+    }
+
+    for (i = 0; i < data.length; i += 1) {
+      itemIndex = data.indexOf(item);
+      state = computeState(i, data.indexOf(item));
+
+      if (state !== null) {
+        options.push({
+          month: data[i],
+          state: computeState(i, itemIndex)
+        });
+      }
+    }
+
+    return options;
+  }
+
+  function generateDom(options) {
+    var i, html = '';
+
+    for (i = 0; i < options.length; i += 1) {
+      html += '<li class="date ' +
+        options[i].state + '">' +
+        options[i].month +
+        '</li>';
+    }
+
+    return html;
+  }
+
+  this.onscroll = function(event, elem) {
+    var
+      options,
+      currentOptionIndex,
+      emptyOption = {
+        month: '--',
+        state: 'hidden'
+      };
+
+    currentOptionIndex = spec.data.indexOf(currentOption) || 0;
+    currentOptionIndex =
+      event.wheelDeltaY < 0 ?
+      currentOptionIndex + 1 :
+      currentOptionIndex - 1;
+
+    if (currentOptionIndex === -1) {
+      currentOptionIndex = 0;
+      return;
+    }
+
+    if (currentOptionIndex === spec.data.length) {
+      currentOptionIndex = spec.data.length - 1;
+      return;
+    }
+
+    currentOption = spec.data[currentOptionIndex];
+    options = generateOptions(spec.data, currentOption);
+
+    if (currentOptionIndex === 1 && options.length < spec.visible - 1) {
+      options = [emptyOption].concat(options);
+    }
+
+    if (currentOptionIndex === 0 && options.length < spec.visible - 1) {
+      options = [emptyOption, emptyOption].concat(options);
+    }
+
+    elem.innerHTML = generateDom(options);
+  };
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+  // Get the datepicker container element by ID
+  var datepickerContainer = document.getElementById("datepicker-container");
+
+  // Get the large datepicker element by class name
+  var monthDatePicker = datepickerContainer.querySelector(".datepicker.large");
+
+  // Get the small datepicker element by class name
+  var dayDatePicker = datepickerContainer.querySelector(".datepicker.small");
+
+  // Get the medium datepicker element by class name
+  var yearDatePicker = datepickerContainer.querySelector(".datepicker.medium");
+
+  // Get current date
+  var currentDate = new Date();
+  var currentMonth = currentDate.toLocaleString('en-US', { month: 'long' });
+  var currentDay = currentDate.getDate();
+  var currentYear = currentDate.getFullYear();
+
+  // Create years array from 1900 to current year
+  var yearsArray = Array.from({length: currentYear - 1900 + 1}, (_, index) => 1900 + index);
+
+  // Check if the elements are found
+  if (monthDatePicker && dayDatePicker && yearDatePicker) {
+    // Create new date picker instances
+    var monthDatepicker = new DatePicker({
+      data: [
+        'January', 'February', 'March', 'April', 'May', 'June', 'July',
+        'August', 'September', 'October', 'November', 'December'
+      ],
+      current: currentMonth,
+      visible: 6
+    });
+
+    var dayDatepicker = new DatePicker({
+      data: Array.apply(null, {
+        length: 31
+      }).map(Number.call, function(n) {
+        return (n || 0) + 1;
+      }),
+      current: currentDay,
+      visible: 6
+    });
+
+    var yearDatepicker = new DatePicker({
+      data: yearsArray,
+      current: currentYear,
+      visible: 6
+    });
+
+    // Attach event listeners for scrolling
+    monthDatePicker.addEventListener("wheel", function(event) {
+      monthDatepicker.onscroll(event, this);
+    });
+
+    dayDatePicker.addEventListener("wheel", function(event) {
+      dayDatepicker.onscroll(event, this);
+    });
+
+    yearDatePicker.addEventListener("wheel", function(event) {
+      yearDatepicker.onscroll(event, this);
+    });
+  } else {
+    console.error("One or more date picker elements not found.");
+  }
+});
+
+      </script>
       <aside>
             <div class="navContainer">
                   <div class="topNav">
@@ -226,8 +386,37 @@
                                     <input id="unosDodajClana" type="text" class="unosCont"
                                           placeholder="Broj telefona" />
                                     <input id="unosDodajClana" type="text" class="unosCont" placeholder="E-posta" />
-                                    <input id="unosDodajClana" type="text" class="unosCont"
-                                          placeholder="Datum rodjenja" />
+                                          <div id="datepicker-container">
+                                                <ul class="datepicker large" onwheel="monthDatepicker.onscroll(event, this)">
+                                                  <li class="date">January</li>
+                                                  <li class="date">February</li>
+                                                  <li class="date active">March</li>
+                                                  <li class="date">April</li>
+                                                  <li class="date">May</li>
+                                                  <li class="date hidden">June</li>
+                                                  <li class="date hidden">July</li>
+                                                  <li class="date hidden">August</li>
+                                                  <li class="date hidden">September</li>
+                                                  <li class="date hidden">October</li>
+                                                  <li class="date hidden">November</li>
+                                                  <li class="date hidden">December</li>
+                                                </ul>
+                                                <ul class="datepicker small" onwheel="dayDatepicker.onscroll(event, this)">
+                                                  <li class="date">12</li>
+                                                  <li class="date">13</li>
+                                                  <li class="date active">14</li>
+                                                  <li class="date">15</li>
+                                                  <li class="date">16</li>
+                                                </ul>
+                                              
+                                                <ul class="datepicker medium" onwheel="yearDatepicker.onscroll(event, this)">
+                                                  <li class="date">2012</li>
+                                                  <li class="date">2013</li>
+                                                  <li class="date active">2014</li>
+                                                  <li class="date">2015</li>
+                                                  <li class="date">2016</li>
+                                                </ul>
+                                              </div>
                                     <input id="unosDodajClana" type="text" class="unosCont"
                                           placeholder="Adresa stanovanja" />
                                     <input id="unosDodajClana" type="text" class="unosCont" placeholder="E-posta" />
@@ -249,8 +438,8 @@
                                                 </li>
                                           </ul>
                                     </div>
-                                    <input id="unosDodajClana" type="text" class="unosCont"
-                                          placeholder="Broj bankovnog racuna" />
+
+                              
                                     <div class="potvrdiOdustani">
                                           <button class="btnPotvrdiodustani odustanidodajClana"
                                                 id="odustanidodajClana">ODUSTANI</button>
