@@ -4,6 +4,7 @@
 {
 	--box-shadow-07: 0 0.7rem 1rem rgba(0, 0, 0, 0.3);
 	--primary: #508aff;
+      --siva: #6a6a6a;
 }
 
 *
@@ -669,6 +670,7 @@ span.population
 
 .popupinfoKnjige
 {
+      opacity: 0;
 	z-index: 1000;
 	display: flex;
 	align-items: center;
@@ -682,6 +684,11 @@ span.population
 	border-top: 0.2rem solid var(--primary);
 	background-color: rgb(250, 250, 250);
 	box-shadow: var(--box-shadow-07);
+      transition: all 0.2s ease-in-out;
+}
+
+.popupinfoKnjige.active{
+      opacity: 1;
 }
 
 .osnovniPodaciKnjiga
@@ -726,7 +733,7 @@ span.population
 
 .textOsnovniPodaciKnjiga h2
 {
-	color: #acacac;
+	color: var(--siva);
 	text-align: center;
 }
 
@@ -838,62 +845,11 @@ span.population
 	text-align: left;
 }
 
+#zatvoriInfoKnjige{
+      float: right;
+      position: absolute;
+      width: 3rem;
+      height: 3rem;
+      color: #252525;
+}
 
-.datepicker {
-      vertical-align: top;
-      padding: 0;
-      width: 150px;
-      height: 200px;
-      background: #fafafa;
-      border-radius: 4px;
-      list-style: none;
-      display: inline-block;
-      cursor: ns-resize;
-      box-shadow: 2px 2px 2px rgba(0, 0, 0, .3);
-    }
-    
-    .datepicker.large {
-      width: 150px;
-    }
-    
-    .datepicker.medium {
-      width: 100px;
-    }
-    
-    .datepicker.small {
-      width: 75px;
-    }
-    
-    @keyframes date {
-      from {
-        top: 5px;
-      }
-      to {
-        top: 0;
-      }
-    }
-    
-    .datepicker .date {
-      width: 100%;
-      box-sizing: border-box;
-      color: #C6C3D6;
-      padding: 5px 15px;
-      text-align: right;
-      font-size: 22px;
-    }
-    
-    .datepicker .date.hidden {
-      visibility: hidden;
-    }
-    
-    .datepicker .date.active {
-      animation-name: date;
-      animation-duration: .2s;
-      animation-fill-mode: forwards;
-      position: relative;
-      left: -15px;
-      background-color: var(--primary);
-      color: white;
-      border-radius: 4px;
-      box-shadow: 5px 5px 5px rgba(0, 0, 0, .3);
-    }

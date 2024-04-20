@@ -50,7 +50,7 @@ var defaultSelectedIcon = document.getElementById('btnPocetna');
 promeniBoju(defaultSelectedIcon);
 
 
-  const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
 
 const cities = [];
 
@@ -70,7 +70,7 @@ function numberWithCommas(x) {
 }
 
 function displayMatches() {
-  const matchArray = findMatches(this.value, cities).slice(0,32);
+  const matchArray = findMatches(this.value, cities).slice(0, 32);
   const html = matchArray.map(place => {
     const regex = new RegExp(this.value, 'gi');
     const cityName = place.city.replace(regex, `<span class="hl">${this.value}</span>`);
@@ -84,51 +84,40 @@ function displayMatches() {
   }).join('');
   suggestions.innerHTML = html;
 }
+const popupinfoKnjige = document.querySelector('.popupinfoKnjige');
 
-function closeSuggestions() {
-  suggestions.innerHTML = '';
+function closeSuggestions(event) {
+  if (!event.target.closest('.suggestions')) {
+    suggestions.innerHTML = '';
+  }
 }
 
 function pasteSuggestion(city) {
   searchInput.value = city;
   suggestions.innerHTML = '';
+  if (popupinfoKnjige) {
+      popupinfoKnjige.classList.add('active');
+  }
 }
+
 
 const searchInput = document.querySelector(".search");
 const suggestions = document.querySelector(".suggestions");
 
 searchInput.addEventListener("change", displayMatches);
 searchInput.addEventListener("keyup", displayMatches);
-
 document.addEventListener('click', closeSuggestions);
 
 suggestions.addEventListener('click', function(event) {
-  if (event.target.tagName === 'LI') {
-    const city = event.target.querySelector('.name').textContent;
-    pasteSuggestion(city);
-  }
-});
-
-suggestions.addEventListener('click', function(event) {
-  event.stopPropagation();
-});
-
-searchInput.addEventListener('focus', function() {
-  this.value = '';
-});
-
-
-suggestions.addEventListener('click', function(event) {
-  if (event.target.tagName === 'SPAN') {
+  if (event.target.tagName === 'LI' || event.target.tagName === 'SPAN') {
     const city = event.target.closest('li').querySelector('.name').textContent;
     pasteSuggestion(city);
   }
 });
 
-suggestions.addEventListener('click', function(event) {
-  event.stopPropagation();
+searchInput.addEventListener('focus', function() {
+  this.value = '';
 });
-
 
 const dugmeOdaberiClanarinu = document.querySelector('.toggle');
 const opcijeClanarine = document.querySelectorAll('.list-item');
